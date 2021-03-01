@@ -12,6 +12,15 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
+    func RegisterRequest(){
+        //Background call register
+        DispatchQueue.global().async {
+            DBAPIControlle.PostRegister()
+            DispatchQueue.main.async {
+                //TODO updte user interface
+            }
+        }
+    }
 
 }

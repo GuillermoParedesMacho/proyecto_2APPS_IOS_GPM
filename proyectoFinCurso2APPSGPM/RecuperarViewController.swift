@@ -13,6 +13,15 @@ class RecuperarViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    func RecoverRequest(){
+        //Background call recover request	
+        DispatchQueue.global().async {
+            DBAPIControlle.PostRecoverPassword()
+            DispatchQueue.main.async {
+                //TODO updte user interface
+            }
+        }
+    }
 
 }
 

@@ -13,5 +13,24 @@ class UserViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    func UseerDataRequest(){
+        //Background get user data
+        DispatchQueue.global().async {
+            DBAPIControlle.GetUserData()
+            DispatchQueue.main.async {
+                //TODO updte user interface
+            }
+        }
+    }
+    
+    func DeleteUserRequest(){
+        //Background call delete user
+        DispatchQueue.global().async {
+            DBAPIControlle.PostDeleteUser()
+            DispatchQueue.main.async {
+                //TODO updte user interface
+            }
+        }
+    }
 
 }

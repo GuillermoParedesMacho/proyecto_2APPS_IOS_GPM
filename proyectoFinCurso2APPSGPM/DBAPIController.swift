@@ -14,7 +14,77 @@ class DBAPIControlle{
     static private var token = "";
     
     //operations
-    static public func logIn(){
+    static public func GetlogIn(){
+        //TODO preparar request
+        var url = urlApi
+        
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
+            
+            guard let data = data, error == nil else{
+                print("Algo fue mal")
+                return
+            }
+            
+        }).resume()
+    }
+    
+    static public func PostRecoverPassword(){
+        //TODO preparar request
+        var url = urlApi
+        
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
+            
+            guard let data = data, error == nil else{
+                print("Algo fue mal")
+                return
+            }
+            
+        }).resume()
+    }
+    
+    static public func PostRegister(){
+        //TODO preparar request
+        var url = urlApi
+        
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
+            
+            guard let data = data, error == nil else{
+                print("Algo fue mal")
+                return
+            }
+            
+        }).resume()
+    }
+    
+    static public func GetUsersList(){
+        //TODO preparar request
+        var url = urlApi
+        
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
+            
+            guard let data = data, error == nil else{
+                print("Algo fue mal")
+                return
+            }
+            
+        }).resume()
+    }
+    
+    static public func GetUserData(){
+        //TODO preparar request
+        var url = urlApi
+        
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
+            
+            guard let data = data, error == nil else{
+                print("Algo fue mal")
+                return
+            }
+            
+        }).resume()
+    }
+    
+    static public func PostDeleteUser(){
         //TODO preparar request
         var url = urlApi
         

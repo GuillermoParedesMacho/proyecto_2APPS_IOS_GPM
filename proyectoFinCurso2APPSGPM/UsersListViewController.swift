@@ -13,5 +13,14 @@ class UsersListViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    func RegisterRequest(){
+        //Background get user list
+        DispatchQueue.global().async {
+            DBAPIControlle.GetUsersList()
+            DispatchQueue.main.async {
+                //TODO updte user interface
+            }
+        }
+    }
 
 }

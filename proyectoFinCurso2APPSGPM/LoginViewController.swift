@@ -13,6 +13,16 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    func logInRequest(){
+        //Background call log in
+        DispatchQueue.global().async {
+            DBAPIControlle.GetlogIn()
+            DispatchQueue.main.async {
+                //TODO updte user interface
+            }
+        }
+    }
 
 
 }
