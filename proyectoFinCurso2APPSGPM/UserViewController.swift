@@ -7,13 +7,22 @@
 import UIKit
 
 class UserViewController: UIViewController {
-
+    
+    //values
+    
+    //actions
+    @IBAction func deleteUserBt(_ sender: UIButton) {
+        deleteUserRequest()
+        //TODO load log in if sucseed
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        userDataRequest()
         // Do any additional setup after loading the view.
     }
 
-    func UseerDataRequest(){
+    func userDataRequest(){
         //Background get user data
         DispatchQueue.global().async {
             DBAPIControlle.GetUserData()
@@ -23,7 +32,7 @@ class UserViewController: UIViewController {
         }
     }
     
-    func DeleteUserRequest(){
+    func deleteUserRequest(){
         //Background call delete user
         DispatchQueue.global().async {
             DBAPIControlle.PostDeleteUser()
