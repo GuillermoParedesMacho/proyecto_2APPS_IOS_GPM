@@ -12,6 +12,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var userTf: UITextField!
     @IBOutlet weak var passwordTf: UITextField!
     @IBOutlet weak var confirmPasswordTf: UITextField!
+    @IBOutlet weak var emailTf: UITextField!
     
     //actions
     @IBAction func registerBt(_ sender: UIButton) {
@@ -19,6 +20,7 @@ class RegisterViewController: UIViewController {
         let user:String = userTf.text!
         let password:String = passwordTf.text!
         let confirmPassword:String = confirmPasswordTf.text!
+        let email:String = emailTf.text!
         
         //check data
         if(user.isEmpty){
@@ -30,6 +32,10 @@ class RegisterViewController: UIViewController {
             return
         }
         else if(confirmPassword.isEmpty){
+            //TODO warning of missing value
+            return
+        }
+        else if(email.isEmpty){
             //TODO warning of missing value
             return
         }
