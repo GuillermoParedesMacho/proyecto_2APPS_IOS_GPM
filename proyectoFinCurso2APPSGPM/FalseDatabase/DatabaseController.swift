@@ -14,8 +14,8 @@ class  DatabaseController{
     //busqueda de usuario ya existente y crear nuevo usuario
     public func registerUser(name:String, password:String, email:String) -> String{
         for user in users{
-            if(name == user.name){ return "user alredy exist" }
-            if(email == user.email){ return "email alredy taken" }
+            if(name == user.name){ return "User alredy exist" }
+            if(email == user.email){ return "Email alredy taken" }
         }
         users.append(UserController(name: name, password: password, email: email))
         return "ok"

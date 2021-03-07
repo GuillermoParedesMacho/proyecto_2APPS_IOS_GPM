@@ -24,23 +24,23 @@ class RegisterViewController: UIViewController {
         
         //check data
         if(user.isEmpty){
-            //TODO warning of missing value
+            okBtpopup(title: "Error", text: "name field is empty")
             return
         }
         else if(password.isEmpty){
-            //TODO warning of missing value
+            okBtpopup(title: "Error", text: "password field is empty")
             return
         }
         else if(confirmPassword.isEmpty){
-            //TODO warning of missing value
+            okBtpopup(title: "Error", text: "confirm passwod field is empty")
             return
         }
         else if(email.isEmpty){
-            //TODO warning of missing value
+            okBtpopup(title: "Error", text: "email field is empty")
             return
         }
         else if(password != confirmPassword){
-            //TODO warning of missing value
+            okBtpopup(title: "Error", text: "the passwords are not the same")
             return
         }
         
@@ -65,11 +65,22 @@ class RegisterViewController: UIViewController {
     func registerRequest(name:String, password:String, email:String){
         //Background call register
         DispatchQueue.global().async {
-            DBAPIControlle.PostRegister(name: name, password: password, email: email)
+            let data = DBAPIControlle.PostRegister(name: name, password: password, email: email)
             DispatchQueue.main.async {
-                //TODO updte user interface
+                if(data == "ok"){
+                    self.okBtpopup(title: "Message", text: "New user registered\nWelcome to the app :)")
+                }
+                else{
+                    self.okBtpopup(title: "Error", text: data)
+                }
             }
         }
+    }
+    
+    func okBtpopup(title:String, text:String){
+        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

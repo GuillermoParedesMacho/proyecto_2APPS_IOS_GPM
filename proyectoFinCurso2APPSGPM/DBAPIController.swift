@@ -19,14 +19,15 @@ class DBAPIControlle{
     //nota: debido a que no se pudo preparar una base de datos, las peticiones se han falseado
     static public func GetlogIn(name:String, password:String) -> String{
         let data = DBcontroller.logInUser(name: name, password: password)
-        if(data.isEmpty || data == "ERR - user not found"){return "User or password not found"}
+        if(data.isEmpty || data == "ERR - user not found"){return "User not found or password incorrect"}
         token = data
         return "ok"
     }
     
     static public func PostRecoverPassword(email:String) -> String{
-        return DBcontroller.recoverPassword(email: email)
-        
+        let data = DBcontroller.recoverPassword(email: email)
+        if(data.isEmpty || data == "ERR - user not found"){return "User not found"}
+        return data
     }
     
     static public func PostRegister(name:String, password:String, email:String) -> String{

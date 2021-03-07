@@ -21,11 +21,11 @@ class LoginViewController: UIViewController {
         
         //cheking data
         if(user.isEmpty){
-            //TODO warning of value empty
+            okBtpopup(title: "Error", text: "username is empty")
             return
         }
         else if(password.isEmpty){
-            //TODO warning of value empty
+            okBtpopup(title: "Error", text: "password is empty")
             return
         }
         
@@ -34,15 +34,15 @@ class LoginViewController: UIViewController {
         
     }
     @IBAction func registerBt(_ sender: UIButton) {
-        performSegue(withIdentifier: "recoverPassword", sender: nil)
+        performSegue(withIdentifier: "register", sender: nil)
     }
     @IBAction func recoverBt(_ sender: UIButton) {
-        performSegue(withIdentifier: "register", sender: nil)
+        performSegue(withIdentifier: "recoverPassword", sender: nil)
 
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()//Looks for single or multiple taps.
+        super.viewDidLoad()
         
         //remove keyboard when touched
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -60,12 +60,20 @@ class LoginViewController: UIViewController {
         DispatchQueue.global().async {
             let data = DBAPIControlle.GetlogIn(name: name, password: password)
             DispatchQueue.main.sync {
-                //TODO gestionar alertas
-                let alert = UIAlertController(title: "data", message: data, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "data", style:.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                if(data != "ok"){
+                    self.okBtpopup(title: "Error", text: data)
+                }
+                else{
+                    self.performSegue(withIdentifier: "mainApp", sender: nil)
+                }
             }
         }
+    }
+    
+    func okBtpopup(title:String, text:String){
+        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }

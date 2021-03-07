@@ -18,7 +18,7 @@ class RecuperarViewController: UIViewController {
         
         //check data
         if(email.isEmpty){
-            //TODO warn user about missing values
+            self.okBtpopup(title: "Error", text: "email field is empty")
             return
         }
         
@@ -43,11 +43,22 @@ class RecuperarViewController: UIViewController {
     func recoverRequest(email:String){
         //Background call recover request	
         DispatchQueue.global().async {
-            DBAPIControlle.PostRecoverPassword()
-            DispatchQueue.main.async {
-                //TODO updte user interface
+            let data = DBAPIControlle.PostRecoverPassword(email: email)
+            DispatchQueue.main.sync {
+                if(data == "User not found"){
+                    self.okBtpopup(title: "Error", text: data)
+                }
+                else{
+                    self.okBtpopup(title: "Place holder", text: "the password is: " + data)
+                }
             }
         }
+    }
+    
+    func okBtpopup(title:String, text:String){
+        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
