@@ -33,4 +33,33 @@ class  DatabaseController{
         }
         return "ERR - user not found"
     }
+    
+    //recuperar contraseña
+    public func recoverPassword(email:String) -> String{
+        for user in users{
+            if(email == user.email){return user.password}
+        }
+        return "ERR - user not found"
+    }
+    
+    //obtener datos del usuario
+    public func getUserData(token:String) -> DBAPIControlle.userDataResponse{
+        for user in users{
+            if(token == user.token){ return DBAPIControlle.userDataResponse(response: "ok", name: user.name, email: user.email) }
+        }
+        return DBAPIControlle.userDataResponse(response: "ERR - User not found", name: "", email: "")
+    }
+    
+    //eliminar al usuario
+    public func deleteUser(token:String) -> String{
+        var x = 0
+        for user in users{
+            if(user.token == token){
+                users.remove(at: x)
+                return "ok"
+            }
+            x = x + 1
+        }
+        return "ERR - user not found"
+    }
 }

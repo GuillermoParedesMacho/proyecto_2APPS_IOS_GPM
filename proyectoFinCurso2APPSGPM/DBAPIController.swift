@@ -21,11 +21,11 @@ class DBAPIControlle{
         let data = DBcontroller.logInUser(name: name, password: password)
         if(data.isEmpty || data == "ERR - user not found"){return "User or password not found"}
         token = data
-        return token
+        return "ok"
     }
     
-    static public func PostRecoverPassword(){
-        //TODO preparar request
+    static public func PostRecoverPassword(email:String) -> String{
+        return DBcontroller.recoverPassword(email: email)
         
     }
     
@@ -39,19 +39,21 @@ class DBAPIControlle{
         
     }
     
-    static public func GetUserData(){
-        //TODO preparar request
+    static public func GetUserData() -> userDataResponse{
+        return DBcontroller.getUserData(token: token)
         
     }
     
-    static public func PostDeleteUser(){
-        //TODO preparar request
-        
+    static public func PostDeleteUser() -> String{
+        return DBcontroller.deleteUser(token: token)
     }
     
     //functions for operations
-    static private func updateAPI(var newToken:String){
-        token = newToken
-    }
     
+    //structures
+    public struct userDataResponse{
+        let response: String
+        let name: String
+        let email: String
+    }
 }
