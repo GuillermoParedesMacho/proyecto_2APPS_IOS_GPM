@@ -16,7 +16,7 @@ class RegisterViewController: UIViewController {
     
     //actions
     @IBAction func registerBt(_ sender: UIButton) {
-        //get data
+        
         let user:String = userTf.text!
         let password:String = passwordTf.text!
         let confirmPassword:String = confirmPasswordTf.text!
@@ -45,21 +45,27 @@ class RegisterViewController: UIViewController {
         }
         
         //send data
-        registerRequest(user: user, password: password)
-    }
-    @IBAction func returnBt(_ sender: UIButton) {
-        //TODO load log in screen
+        registerRequest(name: user, password: password, email: email)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //remove keyboard when touched
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
-    func registerRequest(user:String, password:String){
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    func registerRequest(name:String, password:String, email:String){
         //Background call register
         DispatchQueue.global().async {
-            DBAPIControlle.PostRegister()
+            DBAPIControlle.PostRegister(name: name, password: password, email: email)
             DispatchQueue.main.async {
                 //TODO updte user interface
             }

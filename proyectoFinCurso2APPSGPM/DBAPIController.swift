@@ -10,92 +10,43 @@ import Foundation
 class DBAPIControlle{
     
     //data needed for operations
-    static private let urlApi = "";
-    static private var token = "";
+    static private let urlApi = ""
+    static private var token = ""
+    
+    static private var DBcontroller = DatabaseController()
     
     //operations
-    static public func GetlogIn(){
-        //TODO preparar request
-        var url = urlApi
-        
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-            
-            guard let data = data, error == nil else{
-                print("Algo fue mal")
-                return
-            }
-            
-        }).resume()
+    //nota: debido a que no se pudo preparar una base de datos, las peticiones se han falseado
+    static public func GetlogIn(name:String, password:String) -> String{
+        let data = DBcontroller.logInUser(name: name, password: password)
+        if(data.isEmpty || data == "ERR - user not found"){return "User or password not found"}
+        token = data
+        return token
     }
     
     static public func PostRecoverPassword(){
         //TODO preparar request
-        var url = urlApi
         
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-            
-            guard let data = data, error == nil else{
-                print("Algo fue mal")
-                return
-            }
-            
-        }).resume()
     }
     
-    static public func PostRegister(){
-        //TODO preparar request
-        var url = urlApi
+    static public func PostRegister(name:String, password:String, email:String) -> String{
+        return DBcontroller.registerUser(name: name, password: password, email: email)
         
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-            
-            guard let data = data, error == nil else{
-                print("Algo fue mal")
-                return
-            }
-            
-        }).resume()
     }
     
     static public func GetUsersList(){
         //TODO preparar request
-        var url = urlApi
         
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-            
-            guard let data = data, error == nil else{
-                print("Algo fue mal")
-                return
-            }
-            
-        }).resume()
     }
     
     static public func GetUserData(){
         //TODO preparar request
-        var url = urlApi
         
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-            
-            guard let data = data, error == nil else{
-                print("Algo fue mal")
-                return
-            }
-            
-        }).resume()
     }
     
     static public func PostDeleteUser(){
         //TODO preparar request
-        var url = urlApi
         
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: {data, response, error in
-            
-            guard let data = data, error == nil else{
-                print("Algo fue mal")
-                return
-            }
-            
-        }).resume()
     }
     
     //functions for operations

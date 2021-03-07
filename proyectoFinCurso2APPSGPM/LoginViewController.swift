@@ -30,30 +30,42 @@ class LoginViewController: UIViewController {
         }
         
         //call api
-        logInRequest(user: user, password: password)
+        logInRequest(name: user, password: password)
         
     }
     @IBAction func registerBt(_ sender: UIButton) {
-        //TODO load register screen
+        performSegue(withIdentifier: "recoverPassword", sender: nil)
     }
     @IBAction func recoverBt(_ sender: UIButton) {
-        //TODO load recover screen
+        performSegue(withIdentifier: "register", sender: nil)
+
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        super.viewDidLoad()//Looks for single or multiple taps.
+        
+        //remove keyboard when touched
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
-    func logInRequest(user:String, password:String){
+    //Calls this function when the tap is recognized.
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    func logInRequest(name:String, password:String){
         //Background call log in
         DispatchQueue.global().async {
-            DBAPIControlle.GetlogIn()
-            DispatchQueue.main.async {
-                //TODO updte user interface
+            let data = DBAPIControlle.GetlogIn(name: name, password: password)
+            DispatchQueue.main.sync {
+                //TODO gestionar alertas
+                let alert = UIAlertController(title: "data", message: data, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "data", style:.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
-
 
 }

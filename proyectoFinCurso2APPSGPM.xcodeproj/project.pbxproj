@@ -21,6 +21,8 @@
 		375E48E025E82CC200876195 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E48DF25E82CC200876195 /* UsersListViewController.swift */; };
 		375E48E525E82D8F00876195 /* RecuperarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E48E425E82D8F00876195 /* RecuperarViewController.swift */; };
 		375E48EA25E8364400876195 /* DBAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E48E925E8364400876195 /* DBAPIController.swift */; };
+		37C26F9925F4F05E003BBDDE /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C26F9825F4F05E003BBDDE /* DatabaseController.swift */; };
+		37C26F9E25F4F394003BBDDE /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C26F9D25F4F394003BBDDE /* UserController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		375E48DF25E82CC200876195 /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
 		375E48E425E82D8F00876195 /* RecuperarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecuperarViewController.swift; sourceTree = "<group>"; };
 		375E48E925E8364400876195 /* DBAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBAPIController.swift; sourceTree = "<group>"; };
+		37C26F9825F4F05E003BBDDE /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
+		37C26F9D25F4F394003BBDDE /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,7 @@
 		375E489C25E825C000876195 /* proyectoFinCurso2APPSGPM */ = {
 			isa = PBXGroup;
 			children = (
+				37C26F9725F4EFF3003BBDDE /* FalseDatabase */,
 				375E489D25E825C100876195 /* AppDelegate.swift */,
 				375E489F25E825C100876195 /* SceneDelegate.swift */,
 				375E48A125E825C100876195 /* ViewController.swift */,
@@ -144,6 +149,15 @@
 				375E48C125E825C200876195 /* Info.plist */,
 			);
 			path = proyectoFinCurso2APPSGPMUITests;
+			sourceTree = "<group>";
+		};
+		37C26F9725F4EFF3003BBDDE /* FalseDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				37C26F9825F4F05E003BBDDE /* DatabaseController.swift */,
+				37C26F9D25F4F394003BBDDE /* UserController.swift */,
+			);
+			path = FalseDatabase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +290,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C26F9925F4F05E003BBDDE /* DatabaseController.swift in Sources */,
 				375E48EA25E8364400876195 /* DBAPIController.swift in Sources */,
 				375E48E525E82D8F00876195 /* RecuperarViewController.swift in Sources */,
+				37C26F9E25F4F394003BBDDE /* UserController.swift in Sources */,
 				375E48A225E825C100876195 /* ViewController.swift in Sources */,
 				375E48DB25E82B9B00876195 /* UserViewController.swift in Sources */,
 				375E489E25E825C100876195 /* AppDelegate.swift in Sources */,
