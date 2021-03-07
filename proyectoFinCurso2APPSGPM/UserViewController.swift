@@ -15,6 +15,9 @@ class UserViewController: UIViewController {
     @IBAction func deleteUserBt(_ sender: UIButton) {
         deleteUserRequest()
     }
+    @IBAction func changePasswordBt(_ sender: UIButton) {
+        performSegue(withIdentifier: "ChangePassword", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

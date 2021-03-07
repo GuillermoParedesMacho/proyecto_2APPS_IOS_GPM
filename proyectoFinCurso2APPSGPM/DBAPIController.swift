@@ -49,6 +49,12 @@ class DBAPIControlle{
         return DBcontroller.deleteUser(token: token)
     }
     
+    static public func PostChangepassword(password:String) -> String{
+        let data = DBcontroller.changePassword(token: token, password: password)
+        if(data != "ok"){ return "User not found" }
+        return "ok"
+    }
+    
     //functions for operations
     
     //structures

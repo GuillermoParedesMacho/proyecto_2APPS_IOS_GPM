@@ -62,4 +62,16 @@ class  DatabaseController{
         }
         return "ERR - user not found"
     }
+    
+    //cambiar contrasena
+    public func changePassword(token:String, password:String) -> String{
+        for user in users{
+            if(token == user.token){
+                user.password = password
+                return "ok"
+                
+            }
+        }
+        return "ERR - user not found"
+    }
 }
