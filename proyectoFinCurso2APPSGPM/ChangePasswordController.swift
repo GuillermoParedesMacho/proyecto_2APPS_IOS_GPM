@@ -56,14 +56,7 @@ class ChangePasswordController: UIViewController {
                     self.okBtpopup(title: "Error", text: data)
                 }
                 else{
-                    let alert = UIAlertController(title: "Message", message: "password changed sucsessfully", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    DispatchQueue.main.asyncAfter(deadline: .now()){
-                        alert.dismiss(animated: true, completion: {
-                            self.performSegue(withIdentifier: "mainApp", sender: nil)
-                        })
-                    }
+                    self.okBtpopup(title: "Message", text: "Passsword changed")
                 }
             }
         }

@@ -35,11 +35,6 @@ class DBAPIControlle{
         
     }
     
-    static public func GetUsersList(){
-        //TODO preparar request
-        
-    }
-    
     static public func GetUserData() -> userDataResponse{
         return DBcontroller.getUserData(token: token)
         
@@ -55,6 +50,14 @@ class DBAPIControlle{
         return "ok"
     }
     
+    static public func PostContact(contactName:String) -> String{
+        return DBcontroller.addContact(token: token, name: contactName)
+    }
+    
+    static public func getContactList() -> contactsResponse{
+        return DBcontroller.getContact(token: token)
+    }
+    
     //functions for operations
     
     //structures
@@ -62,5 +65,10 @@ class DBAPIControlle{
         let response: String
         let name: String
         let email: String
+    }
+    
+    public struct contactsResponse{
+        let response: String
+        let contacts: [String]
     }
 }

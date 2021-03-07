@@ -10,6 +10,7 @@ import Foundation
 class  DatabaseController{
     
     private var users: Array<UserController> = Array()
+    private var userContactRelation: Array<UserContactRelation> = Array()
     
     //busqueda de usuario ya existente y crear nuevo usuario
     public func registerUser(name:String, password:String, email:String) -> String{
@@ -55,6 +56,15 @@ class  DatabaseController{
         var x = 0
         for user in users{
             if(user.token == token){
+                var contactsToRemove: Array<String> = Array()
+                for contact in userContactRelation{
+                    if(contact.userName == user.name){
+                        contactsToRemove.append(contact.contactName)
+                    }
+                }
+                for contact in contactsToRemove{
+                    deleteContact(token: token, contactName: contact)
+                }
                 users.remove(at: x)
                 return "ok"
             }
@@ -73,5 +83,58 @@ class  DatabaseController{
             }
         }
         return "ERR - user not found"
+    }
+    
+    //anadir nuevo contacto
+    public func addContact(token:String, name:String) -> String{
+        for user in users{
+            if(user.token == token){
+                for contact in users{
+                    if (contact.name == name){
+                        for existingContact in userContactRelation{
+                            if(existingContact.userName == user.name && existingContact.contactName == contact.name){
+                                return "Contact alredy exist"
+                            }
+                        }
+                        userContactRelation.append(UserContactRelation(userName: user.name, contactName: contact.name))
+                        return "ok"
+                    }
+                }
+                return "Contact not found"
+            }
+        }
+        return "User not found"
+    }
+    
+    public func getContact(token:String) -> DBAPIControlle.contactsResponse{
+        for user in users{
+            if(user.token == token){
+                var contacts:Array<String> = Array()
+                for contact in userContactRelation{
+                    if(contact.userName == user.name){
+                        contacts.append(contact.contactName)
+                    }
+                }
+                return DBAPIControlle.contactsResponse(response: "ok", contacts: contacts)
+            }
+        }
+        return DBAPIControlle.contactsResponse(response: "ERR - User not found", contacts: [])
+    }
+    
+    public func deleteContact(token:String, contactName:String) -> String{
+        for user in users{
+            if(user.token == token){
+                var x = 0
+                for contact in userContactRelation{
+                    if(contact.userName == user.name && contact.contactName == contactName){
+                        userContactRelation.remove(at: x)
+                        return "ok"
+                    }
+                    x = x + 1
+                }
+                return "contact not found"
+            }
+        }
+        return "user not found"
     }
 }
