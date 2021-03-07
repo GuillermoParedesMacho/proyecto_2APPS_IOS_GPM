@@ -18,6 +18,10 @@ class UserViewController: UIViewController {
     @IBAction func changePasswordBt(_ sender: UIButton) {
         performSegue(withIdentifier: "ChangePassword", sender: nil)
     }
+    @IBAction func logOutBt(_ sender: UIButton) {
+        DBAPIControlle.logOut()
+        performSegue(withIdentifier: "logIn", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -247,7 +247,6 @@
                     <connections>
                         <outlet property="newPasswordConfirmTf" destination="kFn-Xn-DmC" id="of8-w3-IQo"/>
                         <outlet property="newPasswordTf" destination="A3Z-ih-Xj1" id="87u-5b-8rX"/>
-                        <segue destination="jop-W0-LI8" kind="show" identifier="mainApp" id="uIn-ZS-gu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2VE-IC-hNq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -274,12 +273,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hA9-oo-6w9" userLabel="ChangePasswordBt">
-                                <rect key="frame" x="146" y="548" width="123" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hA9-oo-6w9" userLabel="ChangePasswordBt">
+                                <rect key="frame" x="145.5" y="549" width="123" height="30"/>
                                 <state key="normal" title="Change Password"/>
                                 <connections>
                                     <action selector="changePasswordBt:" destination="iK8-uA-SUq" eventType="touchUpInside" id="D9I-lt-ITI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Qa-Xs-cb3" userLabel="LogoutBt">
+                                <rect key="frame" x="179.5" y="469" width="55" height="30"/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOutBt:" destination="iK8-uA-SUq" eventType="touchUpInside" id="uc6-tc-Y38"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qre-qR-sRf" userLabel="deleteUserBt">
@@ -294,9 +299,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YcK-8M-i2G" firstAttribute="top" secondItem="zhx-R7-P37" secondAttribute="top" constant="50" id="4Id-Ra-iZp"/>
+                            <constraint firstItem="8Qa-Xs-cb3" firstAttribute="centerX" secondItem="Gz7-Jf-Xy5" secondAttribute="centerX" id="5PC-vA-Qcp"/>
                             <constraint firstItem="zhx-R7-P37" firstAttribute="trailing" secondItem="wGH-sX-VOE" secondAttribute="trailing" constant="50" id="8DP-DG-9Im"/>
+                            <constraint firstItem="hA9-oo-6w9" firstAttribute="top" secondItem="8Qa-Xs-cb3" secondAttribute="bottom" constant="50" id="FSh-qp-RU2"/>
+                            <constraint firstItem="qre-qR-sRf" firstAttribute="top" secondItem="hA9-oo-6w9" secondAttribute="bottom" constant="50" id="N4H-ed-Yhc"/>
                             <constraint firstItem="qre-qR-sRf" firstAttribute="centerX" secondItem="Gz7-Jf-Xy5" secondAttribute="centerX" id="TT5-Jz-WrF"/>
                             <constraint firstItem="YcK-8M-i2G" firstAttribute="centerX" secondItem="Gz7-Jf-Xy5" secondAttribute="centerX" id="XyQ-fT-eDx"/>
+                            <constraint firstItem="hA9-oo-6w9" firstAttribute="centerX" secondItem="Gz7-Jf-Xy5" secondAttribute="centerX" id="sI6-B6-PmO"/>
                             <constraint firstItem="wGH-sX-VOE" firstAttribute="top" secondItem="YcK-8M-i2G" secondAttribute="bottom" constant="10" id="v3Y-L3-Khy"/>
                             <constraint firstItem="wGH-sX-VOE" firstAttribute="leading" secondItem="zhx-R7-P37" secondAttribute="leading" constant="50" id="xdo-eY-PIq"/>
                             <constraint firstItem="zhx-R7-P37" firstAttribute="bottom" secondItem="qre-qR-sRf" secondAttribute="bottom" constant="100" id="zA3-cY-rll"/>
@@ -312,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ykx-lu-uoc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584" y="-607"/>
+            <point key="canvasLocation" x="-584.05797101449275" y="-607.36607142857144"/>
         </scene>
         <!--Lista Usuarios-->
         <scene sceneID="2b6-zA-8Bn">
@@ -494,9 +503,6 @@
             <point key="canvasLocation" x="776.81159420289862" y="91.741071428571431"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="uIn-ZS-gu7"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -63,7 +63,10 @@ class  DatabaseController{
                     }
                 }
                 for contact in contactsToRemove{
-                    deleteContact(token: token, contactName: contact)
+                    let data = deleteContact(token: token, contactName: contact)
+                    if(data != "ok"){
+                        return data
+                    }
                 }
                 users.remove(at: x)
                 return "ok"
@@ -89,6 +92,9 @@ class  DatabaseController{
     public func addContact(token:String, name:String) -> String{
         for user in users{
             if(user.token == token){
+                if(user.name == name){
+                    return "You can't add yourselfe to your contacts"
+                }
                 for contact in users{
                     if (contact.name == name){
                         for existingContact in userContactRelation{

@@ -40,6 +40,10 @@ class DBAPIControlle{
         
     }
     
+    static public func logOut(){
+        token = ""
+    }
+    
     static public func PostDeleteUser() -> String{
         return DBcontroller.deleteUser(token: token)
     }
