@@ -13,7 +13,13 @@ class UserViewController: UIViewController {
     
     //actions
     @IBAction func deleteUserBt(_ sender: UIButton) {
-        deleteUserRequest()
+        let alert = UIAlertController(title: "Message", message: "are you sure you want to delete your user?", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: { (action) in
+            self.deleteUserRequest()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style:.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     @IBAction func changePasswordBt(_ sender: UIButton) {
         performSegue(withIdentifier: "ChangePassword", sender: nil)
@@ -54,13 +60,10 @@ class UserViewController: UIViewController {
                 }
                 else{
                     let alert = UIAlertController(title: "Message", message: "User deleted, bye", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "ok", style:.default, handler: { (action) in
+                        self.performSegue(withIdentifier: "logIn", sender: nil)
+                    }))
                     self.present(alert, animated: true, completion: nil)
-                    DispatchQueue.main.asyncAfter(deadline: .now()){
-                        alert.dismiss(animated: true, completion: {
-                            self.performSegue(withIdentifier: "logIn", sender: nil)
-                        })
-                    }
                 }
             }
         }
