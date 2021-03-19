@@ -44,12 +44,12 @@ class  DatabaseController{
     }
     
     //obtener datos del usuario
-    public func getUserData(token:String) -> DBAPIControlle.userDataResponse{
+    /*public func getUserData(token:String) -> DBAPIControlle.userDataResponse{
         for user in users{
             if(token == user.token){ return DBAPIControlle.userDataResponse(response: "ok", name: user.name, email: user.email) }
         }
         return DBAPIControlle.userDataResponse(response: "ERR - User not found", name: "", email: "")
-    }
+    }*/
     
     //eliminar al usuario
     public func deleteUser(token:String) -> String{

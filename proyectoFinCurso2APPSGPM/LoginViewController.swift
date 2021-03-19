@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         
         //cheking data
         if(user.isEmpty){
-            okBtpopup(title: "Error", text: "username is empty")
+            okBtpopup(title: "Error", text: "email is empty")
             return
         }
         else if(password.isEmpty){
@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
         }
         
         //call api
-        logInRequest(name: user, password: password)
+        logInRequest(email: user, password: password)
         
     }
     @IBAction func registerBt(_ sender: UIButton) {
@@ -55,18 +55,15 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func logInRequest(name:String, password:String){
+    func logInRequest(email:String, password:String){
         //Background call log in
         DispatchQueue.global().async {
-            let data = DBAPIControlle.GetlogIn(name: name, password: password)
-            DispatchQueue.main.sync {
-                if(data != "ok"){
-                    self.okBtpopup(title: "Error", text: data)
-                }
-                else{
-                    self.performSegue(withIdentifier: "mainApp", sender: nil)
-                }
+            DBAPIControlle.GetlogIn(email: email, password: password) {
+                self.performSegue(withIdentifier: "mainApp", sender: nil)
+            } onError: { (err) in
+                self.okBtpopup(title: "Error", text: err!.localizedDescription)
             }
+
         }
     }
     
@@ -75,5 +72,4 @@ class LoginViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
 }

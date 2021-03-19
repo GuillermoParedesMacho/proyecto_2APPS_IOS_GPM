@@ -43,13 +43,13 @@ class RecuperarViewController: UIViewController {
     func recoverRequest(email:String){
         //Background call recover request	
         DispatchQueue.global().async {
-            let data = DBAPIControlle.PostRecoverPassword(email: email)
-            DispatchQueue.main.sync {
-                if(data == "User not found"){
-                    self.okBtpopup(title: "Error", text: data)
+            DBAPIControlle.PostRecoverPassword(email: email) {
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "Message", text: "Email sended for password recovery")
                 }
-                else{
-                    self.okBtpopup(title: "Place holder", text: "the password is: " + data)
+            } onError: { (err) in
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "Error", text: err!.localizedDescription)
                 }
             }
         }

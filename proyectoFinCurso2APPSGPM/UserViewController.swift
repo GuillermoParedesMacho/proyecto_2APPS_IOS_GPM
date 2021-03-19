@@ -25,8 +25,18 @@ class UserViewController: UIViewController {
         performSegue(withIdentifier: "ChangePassword", sender: nil)
     }
     @IBAction func logOutBt(_ sender: UIButton) {
-        DBAPIControlle.logOut()
-        performSegue(withIdentifier: "logIn", sender: nil)
+        DispatchQueue.global().async {
+            DBAPIControlle.logOut {
+                DispatchQueue.main.sync {
+                    self.performSegue(withIdentifier: "logIn", sender: nil)
+                }
+            } onError: { (err) in
+                DispatchQueue.main.sync {
+                    self.okBtpopup(title: "Error", text: err.debugDescription)
+                }
+            }
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -37,15 +47,11 @@ class UserViewController: UIViewController {
     func userDataRequest(){
         //Background get user data
         DispatchQueue.global().async {
-            let data = DBAPIControlle.GetUserData()
-            DispatchQueue.main.async {
-                if(data.response != "ok"){
-                    self.okBtpopup(title: "Error", text: data.response)
-                }
-                else{
-                    let text = "User Name: " + data.name + "\nEmail: " + data.email
-                    self.userDataLb.text = text
-                }
+            DBAPIControlle.GetUserData { (data) in
+                let text = "Name: " + data.name + "\nEmail: " + data.email
+                self.userDataLb.text = text
+            } onError: { (err) in
+                self.okBtpopup(title: "Error", text: err.debugDescription)
             }
         }
     }
@@ -53,17 +59,17 @@ class UserViewController: UIViewController {
     func deleteUserRequest(){
         //Background call delete user
         DispatchQueue.global().async {
-            let data = DBAPIControlle.PostDeleteUser()
-            DispatchQueue.main.sync {
-                if(data != "ok"){
-                    self.okBtpopup(title: "Error", text: data)
-                }
-                else{
+            DBAPIControlle.PostDeleteUser {
+                DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Message", message: "User deleted, bye", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "ok", style:.default, handler: { (action) in
                         self.performSegue(withIdentifier: "logIn", sender: nil)
                     }))
                     self.present(alert, animated: true, completion: nil)
+                }
+            } onError: { (err) in
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "Error", text: err!.localizedDescription)
                 }
             }
         }

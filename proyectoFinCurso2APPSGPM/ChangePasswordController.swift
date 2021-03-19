@@ -50,13 +50,13 @@ class ChangePasswordController: UIViewController {
     func changePasswordRequest(password:String){
         //Background call log in
         DispatchQueue.global().async {
-            let data = DBAPIControlle.PostChangepassword(password: password)
-            DispatchQueue.main.sync {
-                if(data != "ok"){
-                    self.okBtpopup(title: "Error", text: data)
-                }
-                else{
+            DBAPIControlle.PostChangePassword(password: password) {
+                DispatchQueue.main.async {
                     self.okBtpopup(title: "Message", text: "Passsword changed")
+                }
+            } onError: { (err) in
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "Error", text: err!.localizedDescription)
                 }
             }
         }
