@@ -174,7 +174,8 @@ class FirebaseNetworkManager{
                     usersDB.child(dataGroup.key).observe(.value) { (snapshot) in
                         print(snapshot)
                         if let diccionary = snapshot.value as? [String:Any]{
-                            if(filter.contains(diccionary["name"] as! String) || filter.isEmpty){
+                            let name = diccionary["name"] as! String
+                            if(name.contains(filter) || filter.isEmpty){
                                 response.append(ListedUserData(id: dataGroup.key, name: diccionary["name"] as! String))
                                 onSucseed(response)
                             }
