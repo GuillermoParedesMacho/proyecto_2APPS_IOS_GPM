@@ -133,25 +133,10 @@ class FirebaseNetworkManager{
         
     }
     
-    static public func getContactList(onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
-        getContactList(filter:"") {
-            onSucseed()
-        } onError: { (err) in
-            onError(err)
-        }
-    }
     static public func getContactList(filter:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
         
     }
     
-    static public func getUsersList(onSucseed: @escaping (_ userList:Array<UserData>) -> () , onError: @escaping (_ err:String) -> ()){
-        getUsersList(filter:"") {(data) in
-            onSucseed(data)
-        } onError: { (err) in
-            onError(err)
-        }
-
-    }
     static public func getUsersList(filter:String, onSucseed: @escaping (_ userList:Array<UserData>) -> () , onError: @escaping (_ err:String) -> ()){
         var user:UserData? = nil
         GetUserData { (userData) in
@@ -164,7 +149,10 @@ class FirebaseNetworkManager{
                         if let data = dataGroup.value as? [String: Any]{
                             let email = data["email"] as! String
                             if(email != user?.email){
-                                response.append(UserData(name: data["name"] as! String, email: data["email"] as! String))
+                                let name = data["name"] as! String
+                                if(name.contains(filter) || filter.isEmpty){
+                                    response.append(UserData(name: data["name"] as! String, email: data["email"] as! String))
+                                }
                             }
                         }
                     }

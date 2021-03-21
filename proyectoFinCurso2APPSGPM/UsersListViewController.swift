@@ -9,18 +9,12 @@ import UIKit
 class UsersListViewController: UIViewController {
     //values
     @IBOutlet weak var usersListTv: UITableView!
-    @IBOutlet weak var contactNameTf: UITextField!
+    @IBOutlet weak var searchTf: UITextField!
     
     //actions
-    @IBAction func addContactBt(_ sender: UIButton) {
-        let contactName:String = contactNameTf.text!
-        
-        if(contactName.isEmpty){
-            okBtpopup(title: "Error", text: "Contact name is empty")
-            return
-        }
-        
-        //addContact(contactName: contactName)
+    @IBAction func searchBt(_ sender: UIButton) {
+        let searchName = searchTf.text!
+        usersListRequest(filter: searchName)
     }
     
     var contacts:[FirebaseNetworkManager.UserData] = []
@@ -33,7 +27,7 @@ class UsersListViewController: UIViewController {
         usersListTv.dataSource = self
         
         //request and update
-        usersListRequest()
+        usersListRequest(filter: "")
         
         //remove keyboard when touched
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -61,10 +55,10 @@ class UsersListViewController: UIViewController {
         }*/
     }
     
-    func usersListRequest(){
+    func usersListRequest(filter:String){
         //Background get user list
         DispatchQueue.global().async {
-            FirebaseNetworkManager.getUsersList { (userData) in
+            FirebaseNetworkManager.getUsersList(filter: filter) { (userData) in
                 DispatchQueue.main.async {
                     self.contacts = userData
                     self.usersListTv.reloadData()
