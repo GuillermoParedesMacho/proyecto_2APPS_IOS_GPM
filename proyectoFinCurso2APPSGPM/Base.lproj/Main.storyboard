@@ -231,9 +231,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kFn-Xn-DmC">
+                                <rect key="frame" x="107" y="206" width="200" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="fAN-Bp-SHH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9b-od-Gie" userLabel="Acceptbt">
                                 <rect key="frame" x="157" y="340" width="100" height="30"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="hzz-xT-o7d"/>
                                 </constraints>
@@ -244,14 +252,6 @@
                                     <action selector="acceptBt:" destination="hdL-4a-Z8d" eventType="touchUpInside" id="cm9-jS-9Af"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kFn-Xn-DmC">
-                                <rect key="frame" x="107" y="206" width="200" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="fAN-Bp-SHH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DNR-J5-Yum"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
@@ -521,7 +521,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUc-1A-tHf" userLabel="registerBt">
                                 <rect key="frame" x="157" y="541" width="100" height="30"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="cKM-tW-2mV"/>
                                 </constraints>
@@ -578,7 +578,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26y-Fg-nYt" userLabel="ChangeEmailBt">
                                 <rect key="frame" x="289" y="216" width="100" height="34"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="1Ge-Zs-flf"/>
                                     <constraint firstAttribute="width" constant="100" id="YKT-HF-yBG"/>
@@ -592,7 +592,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyh-e3-7wq" userLabel="ChangePaswordBt">
                                 <rect key="frame" x="107" y="320" width="200" height="31"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Ekb-25-oJn"/>
                                     <constraint firstAttribute="width" constant="200" id="vXy-qg-w9L"/>
@@ -640,7 +640,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbN-hl-KAE" userLabel="ChangeNameBT">
                                 <rect key="frame" x="289" y="101" width="100" height="34"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="0Ab-ed-clx"/>
                                     <constraint firstAttribute="height" constant="34" id="0mF-ch-Qu5"/>
