@@ -65,10 +65,10 @@ class RegisterViewController: UIViewController {
     func registerRequest(name:String, password:String, email:String){
         //Background call register
         DispatchQueue.global().async {
-            DBAPIControlle.PostRegister(name: name, password: password, email: email) {
+            FirebaseNetworkManager.PostRegister(name: name, password: password, email: email) {
                 self.okBtpopup(title: "Message", text: "New user registered\nWelcome to the app :)")
             } onError: { (err) in
-                self.okBtpopup(title: "Error", text: err.debugDescription)
+                self.okBtpopup(title: "Error", text: err)
             }
 
         }

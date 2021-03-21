@@ -58,10 +58,10 @@ class LoginViewController: UIViewController {
     func logInRequest(email:String, password:String){
         //Background call log in
         DispatchQueue.global().async {
-            DBAPIControlle.GetlogIn(email: email, password: password) {
+            FirebaseNetworkManager.GetlogIn(email: email, password: password) {
                 self.performSegue(withIdentifier: "mainApp", sender: nil)
             } onError: { (err) in
-                self.okBtpopup(title: "Error", text: err!.localizedDescription)
+                self.okBtpopup(title: "Error", text: err)
             }
 
         }

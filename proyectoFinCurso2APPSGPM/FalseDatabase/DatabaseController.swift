@@ -112,7 +112,7 @@ class  DatabaseController{
         return "User not found"
     }
     
-    public func getContact(token:String) -> DBAPIControlle.contactsResponse{
+    public func getContact(token:String) -> FirebaseNetworkManager.contactsResponse{
         for user in users{
             if(user.token == token){
                 var contacts:Array<String> = Array()
@@ -121,10 +121,10 @@ class  DatabaseController{
                         contacts.append(contact.contactName)
                     }
                 }
-                return DBAPIControlle.contactsResponse(response: "ok", contacts: contacts)
+                return FirebaseNetworkManager.contactsResponse(response: "ok", contacts: contacts)
             }
         }
-        return DBAPIControlle.contactsResponse(response: "ERR - User not found", contacts: [])
+        return FirebaseNetworkManager.contactsResponse(response: "ERR - User not found", contacts: [])
     }
     
     public func deleteContact(token:String, contactName:String) -> String{

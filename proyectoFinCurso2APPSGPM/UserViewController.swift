@@ -21,12 +21,12 @@ class UserViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
-    @IBAction func changePasswordBt(_ sender: UIButton) {
-        performSegue(withIdentifier: "ChangePassword", sender: nil)
+    @IBAction func settingsBt(_ sender: UIButton) {
+        performSegue(withIdentifier: "Settings", sender: nil)
     }
     @IBAction func logOutBt(_ sender: UIButton) {
         DispatchQueue.global().async {
-            DBAPIControlle.logOut {
+            FirebaseNetworkManager.logOut {
                 DispatchQueue.main.sync {
                     self.performSegue(withIdentifier: "logIn", sender: nil)
                 }
@@ -47,11 +47,11 @@ class UserViewController: UIViewController {
     func userDataRequest(){
         //Background get user data
         DispatchQueue.global().async {
-            DBAPIControlle.GetUserData { (data) in
+            FirebaseNetworkManager.GetUserData { (data) in
                 let text = "Name: " + data.name + "\nEmail: " + data.email
                 self.userDataLb.text = text
             } onError: { (err) in
-                self.okBtpopup(title: "Error", text: err.debugDescription)
+                self.okBtpopup(title: "Error", text: err)
             }
         }
     }
@@ -59,7 +59,7 @@ class UserViewController: UIViewController {
     func deleteUserRequest(){
         //Background call delete user
         DispatchQueue.global().async {
-            DBAPIControlle.PostDeleteUser {
+            FirebaseNetworkManager.PostDeleteUser {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Message", message: "User deleted, bye", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "ok", style:.default, handler: { (action) in
@@ -69,7 +69,7 @@ class UserViewController: UIViewController {
                 }
             } onError: { (err) in
                 DispatchQueue.main.async {
-                    self.okBtpopup(title: "Error", text: err!.localizedDescription)
+                    self.okBtpopup(title: "Error", text: err)
                 }
             }
         }

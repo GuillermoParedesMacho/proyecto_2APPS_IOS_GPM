@@ -43,13 +43,13 @@ class RecuperarViewController: UIViewController {
     func recoverRequest(email:String){
         //Background call recover request	
         DispatchQueue.global().async {
-            DBAPIControlle.PostRecoverPassword(email: email) {
+            FirebaseNetworkManager.PostRecoverPassword(email: email) {
                 DispatchQueue.main.async {
                     self.okBtpopup(title: "Message", text: "Email sended for password recovery")
                 }
             } onError: { (err) in
                 DispatchQueue.main.async {
-                    self.okBtpopup(title: "Error", text: err!.localizedDescription)
+                    self.okBtpopup(title: "Error", text: err)
                 }
             }
         }

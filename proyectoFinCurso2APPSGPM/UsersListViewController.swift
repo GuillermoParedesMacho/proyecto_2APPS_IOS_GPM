@@ -49,7 +49,7 @@ class UsersListViewController: UIViewController {
     func addContact(contactName:String){
         //Background add contact
         DispatchQueue.global().async {
-            let data = DBAPIControlle.PostContact(contactName: contactName)
+            let data = FirebaseNetworkManager.PostContact(contactName: contactName)
             DispatchQueue.main.sync {
                 if(data != "ok"){
                     self.okBtpopup(title: "ERROR", text: data)
@@ -64,7 +64,7 @@ class UsersListViewController: UIViewController {
     func usersListRequest(){
         //Background get user list
         DispatchQueue.global().async {
-            let data = DBAPIControlle.getContactList()
+            let data = FirebaseNetworkManager.getContactList()
             DispatchQueue.main.sync {
                 if(data.response != "ok"){
                     self.okBtpopup(title: "ERROR", text: data.response)
