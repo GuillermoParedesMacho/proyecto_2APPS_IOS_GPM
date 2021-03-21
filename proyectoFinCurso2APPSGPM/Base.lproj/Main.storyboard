@@ -191,7 +191,7 @@
                     <connections>
                         <segue destination="iK8-uA-SUq" kind="relationship" relationship="viewControllers" id="G0d-nW-3fd"/>
                         <segue destination="M3j-jV-2f7" kind="relationship" relationship="viewControllers" id="5an-s8-EY6"/>
-                        <segue destination="Ui1-Mq-hfv" kind="relationship" relationship="viewControllers" id="gho-0S-b6g"/>
+                        <segue destination="Ui1-Mq-hfv" kind="relationship" relationship="viewControllers" id="bgz-pa-y1f"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABD-d2-yzF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -280,7 +280,7 @@
             </objects>
             <point key="canvasLocation" x="-1984" y="-607"/>
         </scene>
-        <!--Usuario-->
+        <!--User-->
         <scene sceneID="sn3-Ig-DDA">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="iK8-uA-SUq" customClass="UserViewController" customModule="proyectoFinCurso2APPSGPM" customModuleProvider="target" sceneMemberID="viewController">
@@ -357,7 +357,7 @@
                             <constraint firstItem="zhx-R7-P37" firstAttribute="bottom" secondItem="qre-qR-sRf" secondAttribute="bottom" constant="100" id="zA3-cY-rll"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Usuario" id="ni9-Xu-Yxg"/>
+                    <tabBarItem key="tabBarItem" title="User" id="ni9-Xu-Yxg"/>
                     <navigationItem key="navigationItem" id="aNe-8R-Wrk"/>
                     <connections>
                         <outlet property="userDataLb" destination="wGH-sX-VOE" id="sQt-o2-yRt"/>
@@ -369,7 +369,7 @@
             </objects>
             <point key="canvasLocation" x="-584.05797101449275" y="-607.36607142857144"/>
         </scene>
-        <!--Lista Usuarios-->
+        <!--Users List-->
         <scene sceneID="2b6-zA-8Bn">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="M3j-jV-2f7" customClass="UsersListViewController" customModule="proyectoFinCurso2APPSGPM" customModuleProvider="target" sceneMemberID="viewController">
@@ -436,7 +436,7 @@
                             <constraint firstItem="ODu-St-zDQ" firstAttribute="top" secondItem="9jE-mR-KLW" secondAttribute="bottom" id="kHg-TT-i4X"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Lista Usuarios" id="PWv-3g-Uyg"/>
+                    <tabBarItem key="tabBarItem" title="Users List" id="PWv-3g-Uyg"/>
                     <connections>
                         <outlet property="searchTf" destination="ODu-St-zDQ" id="9LS-PQ-v2H"/>
                         <outlet property="usersListTv" destination="GuF-OW-yCm" id="vnL-uZ-dFP"/>
@@ -757,7 +757,7 @@
                             <constraint firstItem="sEl-Ls-HZE" firstAttribute="trailing" secondItem="49U-Wu-23E" secondAttribute="trailing" constant="10" id="tRM-2s-bVa"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Lista Usuarios" id="sJm-ED-bIe"/>
+                    <tabBarItem key="tabBarItem" title="Contact List" id="sJm-ED-bIe"/>
                     <connections>
                         <outlet property="contactsTv" destination="kFA-48-pED" id="Cp8-N9-4Kx"/>
                         <outlet property="searchTf" destination="qxP-Q7-Ask" id="YiD-SP-IQb"/>
