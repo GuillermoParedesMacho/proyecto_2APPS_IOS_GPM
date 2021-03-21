@@ -17,7 +17,7 @@ class UsersListViewController: UIViewController {
         usersListRequest(filter: searchName)
     }
     
-    var contacts:[FirebaseNetworkManager.UserData] = []
+    var contacts:[FirebaseNetworkManager.ListedUserData] = []
     //let test = ["test1","test2","test3"]
 
     override func viewDidLoad() {
@@ -40,25 +40,26 @@ class UsersListViewController: UIViewController {
         view.endEditing(true)
     }
 
-    func addContact(contactName:String){
+    func addContact(contact:FirebaseNetworkManager.ListedUserData){
         //Background add contact
-        /*DispatchQueue.global().async {
-            let data = FirebaseNetworkManager.PostContact(contactName: contactName)
-            DispatchQueue.main.sync {
-                if(data != "ok"){
-                    self.okBtpopup(title: "ERROR", text: data)
+        DispatchQueue.global().async {
+            FirebaseNetworkManager.PostAddContact(contact: contact) {
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "Message", text: "Contact added sucsessfully")
                 }
-                else{
-                    self.usersListRequest()
+            } onError: { (err) in
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "Error", text: err)
                 }
             }
-        }*/
+
+        }
     }
     
     func usersListRequest(filter:String){
         //Background get user list
         DispatchQueue.global().async {
-            FirebaseNetworkManager.getUsersList(filter: filter) { (userData) in
+            FirebaseNetworkManager.GetUsersList(filter: filter) { (userData) in
                 DispatchQueue.main.async {
                     self.contacts = userData
                     self.usersListTv.reloadData()
@@ -81,7 +82,14 @@ class UsersListViewController: UIViewController {
 }
 
 extension UsersListViewController:UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Message", message: "you want to add " + contacts[indexPath.row].name + " to your contacts?", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: { (action) in
+            self.addContact(contact: self.contacts[indexPath.row])
+        }))
+        alert.addAction(UIAlertAction(title: "No", style:.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension UsersListViewController: UITableViewDataSource{

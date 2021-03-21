@@ -11,11 +11,10 @@ import Firebase
 class FirebaseNetworkManager{
     
     //data needed for operations
-    static private let urlApi = ""
-    static private var token = ""
     static private let auth = Auth.auth()
     static private let dataBase = Database.database().reference()
     static private let usersDB = dataBase.child("Users")
+    static private let contactsDB = dataBase.child("Contacts")
     
     //operations
     static public func GetlogIn(email:String, password:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
@@ -24,6 +23,23 @@ class FirebaseNetworkManager{
                 onError(error!.localizedDescription)
                 return
             }
+            onSucseed()
+        }
+    }
+    
+    static public func PostRegister(name:String, password:String, email:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        auth.createUser(withEmail: email, password: password) { (authDataResult, err) in
+            if(err != nil){
+                onError(err!.localizedDescription)
+                return
+            }
+            
+            let uid = auth.currentUser?.uid
+            if(uid == nil){
+                onError("User not found")
+                return
+            }
+            usersDB.child(uid!).setValue(["name":name, "email":email])
             onSucseed()
         }
     }
@@ -46,7 +62,10 @@ class FirebaseNetworkManager{
             }
             
             let uid = auth.currentUser?.uid
-            if(uid == nil){ onError("User not found") }
+            if(uid == nil){
+                onError("User not found")
+                return
+            }
             usersDB.child(uid!).updateChildValues(["email":email])
             onSucseed()
         })
@@ -68,20 +87,6 @@ class FirebaseNetworkManager{
                 onError(err!.localizedDescription)
                 return
             }
-            onSucseed()
-        }
-    }
-    
-    static public func PostRegister(name:String, password:String, email:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
-        auth.createUser(withEmail: email, password: password) { (authDataResult, err) in
-            if(err != nil){
-                onError(err!.localizedDescription)
-                return
-            }
-            
-            let uid = auth.currentUser?.uid
-            if(uid == nil){ onError("User not found") }
-            usersDB.child(uid!).setValue(["name":name, "email":email])
             onSucseed()
         }
     }
@@ -111,47 +116,86 @@ class FirebaseNetworkManager{
     }
     
     static public func PostDeleteUser(onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
-        let uid = auth.currentUser?.uid
-        if(uid == nil){onError("User not found")}
-        
-        usersDB.child(uid!).removeValue()
-        onSucseed()
-        auth.currentUser?.delete(completion: { (err) in
-            if(err != nil){
-                onError(err!.localizedDescription)
+        GetUserData { (userData) in
+            let uid = auth.currentUser?.uid
+            if(uid == nil){
+                onError("User not found")
                 return
             }
-            onSucseed()
-        })
-    }
-    
-    static public func PostAddContact(contactName:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+            
+            contactsDB.child(userData.email).removeValue()
+            usersDB.child(uid!).removeValue()
+            
+            auth.currentUser?.delete(completion: { (err) in
+                if(err != nil){
+                    onError(err!.localizedDescription)
+                    return
+                }
+                onSucseed()
+            })
+        } onError: { (err) in
+            onError(err)
+        }
+
         
     }
     
-    static public func PostRemoveContact(contactName:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
-        
+    static public func PostAddContact(contact:ListedUserData, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        let uid = auth.currentUser?.uid
+        if(uid == nil){
+            onError("User not found")
+            return
+        }
+        contactsDB.child(uid!).child(contact.id).setValue(["name":contact.name])
+        onSucseed()
     }
     
-    static public func getContactList(filter:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
-        
+    static public func PostRemoveContact(contact:ListedUserData, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        let uid = auth.currentUser?.uid
+        if(uid == nil){
+            onError("User not found")
+            return
+        }
+        contactsDB.child(uid!).child(contact.id).removeValue()
+        onSucseed()
     }
     
-    static public func getUsersList(filter:String, onSucseed: @escaping (_ userList:Array<UserData>) -> () , onError: @escaping (_ err:String) -> ()){
-        var user:UserData? = nil
+    static public func GetContactList(filter:String, onSucseed: @escaping (_ userList:Array<ListedUserData>) -> () , onError: @escaping (_ err:String) -> ()){
+        let uid = auth.currentUser?.uid
+        if(uid == nil){
+            onError("User not found")
+            return
+        }
+        
+        var response:Array<ListedUserData> = []
+        contactsDB.observeSingleEvent(of: .value) { (snapshot) in
+            if(snapshot.childrenCount > 0){
+                for dataGroup in snapshot.children.allObjects as! [DataSnapshot]{
+                    usersDB.child(dataGroup.key).observe(.value) { (snapshot) in
+                        if let diccionary = snapshot.value as? [String:Any]{
+                            response.append(ListedUserData(id: dataGroup.key, name: diccionary["name"] as! String))
+                        }
+                    } withCancel: { (err) in
+                        contactsDB.child(uid!).child(dataGroup.key).removeValue()
+                    }
+                }
+            }
+            onSucseed(response)
+        }
+    }
+    
+    static public func GetUsersList(filter:String, onSucseed: @escaping (_ userList:Array<ListedUserData>) -> () , onError: @escaping (_ err:String) -> ()){
         GetUserData { (userData) in
-            user = userData
-        
-            var response:Array<UserData> = []
+            var response:Array<ListedUserData> = []
             usersDB.observeSingleEvent(of: .value) { (snapshot) in
                 if(snapshot.childrenCount > 0){
                     for dataGroup in snapshot.children.allObjects as! [DataSnapshot]{
                         if let data = dataGroup.value as? [String: Any]{
                             let email = data["email"] as! String
-                            if(email != user?.email){
+                            if(email != userData.email){
                                 let name = data["name"] as! String
                                 if(name.contains(filter) || filter.isEmpty){
-                                    response.append(UserData(name: data["name"] as! String, email: data["email"] as! String))
+                                    response.append(ListedUserData(id: dataGroup.key, name: data["name"] as! String))
                                 }
                             }
                         }
@@ -172,6 +216,12 @@ class FirebaseNetworkManager{
     public struct UserData{
         let name: String
         let email: String
+    }
+    
+    
+    public struct ListedUserData{
+        let id: String
+        let name: String
     }
     
     public struct contactsResponse{
