@@ -191,6 +191,7 @@
                     <connections>
                         <segue destination="iK8-uA-SUq" kind="relationship" relationship="viewControllers" id="G0d-nW-3fd"/>
                         <segue destination="M3j-jV-2f7" kind="relationship" relationship="viewControllers" id="5an-s8-EY6"/>
+                        <segue destination="Ui1-Mq-hfv" kind="relationship" relationship="viewControllers" id="gho-0S-b6g"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABD-d2-yzF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -688,6 +689,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEh-jR-rbw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1288.4057971014495" y="-607.36607142857144"/>
+        </scene>
+        <!--Lista Contactos-->
+        <scene sceneID="ePc-he-nib">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="Ui1-Mq-hfv" userLabel="Lista Contactos" customClass="ContactsListViewController" customModule="proyectoFinCurso2APPSGPM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dyS-qI-8Se">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kFA-48-pED">
+                                <rect key="frame" x="0.0" y="106" width="414" height="653"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userContact" id="ebM-Pu-GsD">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ebM-Pu-GsD" id="9SH-nx-LJg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search by username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpf-xR-a85">
+                                <rect key="frame" x="10" y="20" width="394" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qxP-Q7-Ask">
+                                <rect key="frame" x="10" y="41" width="244" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="E7t-6s-8GJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49U-Wu-23E" userLabel="SearchBt">
+                                <rect key="frame" x="304" y="41" width="100" height="30"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="QKL-0w-gNO"/>
+                                </constraints>
+                                <state key="normal" title="Search">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchBt:" destination="Ui1-Mq-hfv" eventType="touchUpInside" id="ukp-Bk-O1A"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sEl-Ls-HZE"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                        <constraints>
+                            <constraint firstItem="kFA-48-pED" firstAttribute="leading" secondItem="sEl-Ls-HZE" secondAttribute="leading" id="A6d-6W-IXT"/>
+                            <constraint firstItem="49U-Wu-23E" firstAttribute="top" secondItem="zpf-xR-a85" secondAttribute="bottom" id="DpX-dl-89m"/>
+                            <constraint firstItem="qxP-Q7-Ask" firstAttribute="leading" secondItem="sEl-Ls-HZE" secondAttribute="leading" constant="10" id="Iuq-pN-jb5"/>
+                            <constraint firstItem="qxP-Q7-Ask" firstAttribute="top" secondItem="zpf-xR-a85" secondAttribute="bottom" id="Nh5-ZX-qPY"/>
+                            <constraint firstItem="sEl-Ls-HZE" firstAttribute="bottom" secondItem="kFA-48-pED" secondAttribute="bottom" id="OIf-1t-TlY"/>
+                            <constraint firstItem="sEl-Ls-HZE" firstAttribute="trailing" secondItem="kFA-48-pED" secondAttribute="trailing" id="XI0-LI-OM6"/>
+                            <constraint firstItem="sEl-Ls-HZE" firstAttribute="trailing" secondItem="zpf-xR-a85" secondAttribute="trailing" constant="10" id="ZYN-IK-J0Y"/>
+                            <constraint firstItem="kFA-48-pED" firstAttribute="top" secondItem="qxP-Q7-Ask" secondAttribute="bottom" constant="30" id="dEa-oo-lt5"/>
+                            <constraint firstItem="zpf-xR-a85" firstAttribute="leading" secondItem="sEl-Ls-HZE" secondAttribute="leading" constant="10" id="fcu-MX-qbt"/>
+                            <constraint firstItem="49U-Wu-23E" firstAttribute="leading" secondItem="qxP-Q7-Ask" secondAttribute="trailing" constant="50" id="iJH-bv-iyg"/>
+                            <constraint firstItem="zpf-xR-a85" firstAttribute="top" secondItem="sEl-Ls-HZE" secondAttribute="top" constant="20" id="t0x-95-NEF"/>
+                            <constraint firstItem="sEl-Ls-HZE" firstAttribute="trailing" secondItem="49U-Wu-23E" secondAttribute="trailing" constant="10" id="tRM-2s-bVa"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Lista Usuarios" id="sJm-ED-bIe"/>
+                    <connections>
+                        <outlet property="contactsTv" destination="kFA-48-pED" id="Cp8-N9-4Kx"/>
+                        <outlet property="searchTf" destination="qxP-Q7-Ask" id="YiD-SP-IQb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pu1-Ye-57Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="846" y="-607"/>
         </scene>
     </scenes>
     <resources>

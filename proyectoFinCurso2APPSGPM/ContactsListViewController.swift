@@ -1,28 +1,28 @@
 //
-//  UsersListViewController.swift
+//  ContactsListViewController.swift
 //  proyectoFinCurso2APPSGPM
 //
-//  Created by user177872 on 2/25/21.
+//  Created by user177872 on 3/21/21.
 //
+
 import UIKit
 
-class UsersListViewController: UIViewController {
+class ContactsListViewController:ViewController{
     //values
-    @IBOutlet weak var usersListTv: UITableView!
+    @IBOutlet weak var contactsTv: UITableView!
     @IBOutlet weak var searchTf: UITextField!
     var contacts:[FirebaseNetworkManager.ListedUserData] = []
     
     //actions
     @IBAction func searchBt(_ sender: UIButton) {
-        let searchName = searchTf.text!
-        usersListRequest(filter: searchName)
+        let filter = searchTf.text!
+        contactsListRequest(filter: filter)
     }
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         //table stuff
-        usersListTv.delegate = self
-        usersListTv.dataSource = self
+        contactsTv.delegate = self
+        contactsTv.dataSource = self
         
         //remove keyboard when touched
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -30,8 +30,8 @@ class UsersListViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //request and update
-        usersListRequest(filter: "")
+        //reuest and update
+        contactsListRequest(filter: "")
     }
     
     //Calls this function when the tap is recognized.
@@ -39,13 +39,14 @@ class UsersListViewController: UIViewController {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
-
-    func addContact(contact:FirebaseNetworkManager.ListedUserData){
+    
+    func removeContact(contact:FirebaseNetworkManager.ListedUserData){
         //Background add contact
         DispatchQueue.global().async {
-            FirebaseNetworkManager.PostAddContact(contact: contact) {
+            FirebaseNetworkManager.PostRemoveContact(contact: contact) {
                 DispatchQueue.main.async {
-                    self.okBtpopup(title: "Message", text: "Contact added sucsessfully")
+                    self.okBtpopup(title: "Message", text: "Contact removed sucsessfully")
+                    self.contactsListRequest(filter: "")
                 }
             } onError: { (err) in
                 DispatchQueue.main.async {
@@ -56,14 +57,14 @@ class UsersListViewController: UIViewController {
         }
     }
     
-    func usersListRequest(filter:String){
+    func contactsListRequest(filter:String){
         //Background get user list
         DispatchQueue.global().async {
-            FirebaseNetworkManager.GetUsersList(filter: filter) { (userData) in
+            FirebaseNetworkManager.GetContactList(filter: filter) { (userData) in
                 DispatchQueue.main.async {
                     self.contacts = userData
-                    self.usersListTv.reloadData()
-                    self.usersListTv.endUpdates()
+                    self.contactsTv.reloadData()
+                    self.contactsTv.endUpdates()
                 }
             } onError: { (err) in
                 DispatchQueue.main.async {
@@ -78,21 +79,21 @@ class UsersListViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "ok", style:.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
 }
 
-extension UsersListViewController:UITableViewDelegate{
+
+extension ContactsListViewController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = UIAlertController(title: "Message", message: "you want to add " + contacts[indexPath.row].name + " to your contacts?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Yes", style:.default, handler: { (action) in
-            self.addContact(contact: self.contacts[indexPath.row])
+            self.removeContact(contact: self.contacts[indexPath.row])
         }))
         alert.addAction(UIAlertAction(title: "No", style:.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
 
-extension UsersListViewController: UITableViewDataSource{
+extension ContactsListViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contacts.count
     }

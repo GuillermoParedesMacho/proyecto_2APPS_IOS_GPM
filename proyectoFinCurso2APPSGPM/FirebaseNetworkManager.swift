@@ -123,7 +123,7 @@ class FirebaseNetworkManager{
                 return
             }
             
-            contactsDB.child(userData.email).removeValue()
+            contactsDB.child(uid!).removeValue()
             usersDB.child(uid!).removeValue()
             
             auth.currentUser?.delete(completion: { (err) in
@@ -168,12 +168,19 @@ class FirebaseNetworkManager{
         }
         
         var response:Array<ListedUserData> = []
-        contactsDB.observeSingleEvent(of: .value) { (snapshot) in
+        contactsDB.child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             if(snapshot.childrenCount > 0){
                 for dataGroup in snapshot.children.allObjects as! [DataSnapshot]{
                     usersDB.child(dataGroup.key).observe(.value) { (snapshot) in
+                        print(snapshot)
                         if let diccionary = snapshot.value as? [String:Any]{
-                            response.append(ListedUserData(id: dataGroup.key, name: diccionary["name"] as! String))
+                            if(filter.contains(diccionary["name"] as! String) || filter.isEmpty){
+                                response.append(ListedUserData(id: dataGroup.key, name: diccionary["name"] as! String))
+                                onSucseed(response)
+                            }
+                        }
+                        else{
+                            contactsDB.child(uid!).child(dataGroup.key).removeValue()
                         }
                     } withCancel: { (err) in
                         contactsDB.child(uid!).child(dataGroup.key).removeValue()

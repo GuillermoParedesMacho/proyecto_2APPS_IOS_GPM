@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		375038C32607DB1A0016EECE /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375038C22607DB1A0016EECE /* ContactsListViewController.swift */; };
 		375469F426076328008FED87 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375469F326076328008FED87 /* SettingsViewController.swift */; };
 		375E489E25E825C100876195 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E489D25E825C100876195 /* AppDelegate.swift */; };
 		375E48A025E825C100876195 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E489F25E825C100876195 /* SceneDelegate.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		203B034D3F62EC399CB0E1C3 /* Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests.release.xcconfig"; path = "Target Support Files/Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests/Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests.release.xcconfig"; sourceTree = "<group>"; };
 		28351CE07C839FD6FC77060C /* Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests.debug.xcconfig"; path = "Target Support Files/Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests/Pods-proyectoFinCurso2APPSGPM-proyectoFinCurso2APPSGPMUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		375038C22607DB1A0016EECE /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
 		375469F326076328008FED87 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		375E489A25E825C000876195 /* proyectoFinCurso2APPSGPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = proyectoFinCurso2APPSGPM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375E489D25E825C100876195 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				375E48DA25E82B9B00876195 /* UserViewController.swift */,
 				375E48DF25E82CC200876195 /* UsersListViewController.swift */,
 				375E48E925E8364400876195 /* FirebaseNetworkManager.swift */,
+				375038C22607DB1A0016EECE /* ContactsListViewController.swift */,
 				375E48A325E825C100876195 /* Main.storyboard */,
 				375E48A625E825C200876195 /* Assets.xcassets */,
 				375E48A825E825C200876195 /* LaunchScreen.storyboard */,
@@ -440,6 +443,7 @@
 				375E48A225E825C100876195 /* ViewController.swift in Sources */,
 				375E48DB25E82B9B00876195 /* UserViewController.swift in Sources */,
 				375E489E25E825C100876195 /* AppDelegate.swift in Sources */,
+				375038C32607DB1A0016EECE /* ContactsListViewController.swift in Sources */,
 				375E48E025E82CC200876195 /* UsersListViewController.swift in Sources */,
 				375469F426076328008FED87 /* SettingsViewController.swift in Sources */,
 				375E48A025E825C100876195 /* SceneDelegate.swift in Sources */,
