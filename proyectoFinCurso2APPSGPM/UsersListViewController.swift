@@ -20,10 +20,10 @@ class UsersListViewController: UIViewController {
             return
         }
         
-        addContact(contactName: contactName)
+        //addContact(contactName: contactName)
     }
     
-    var contacts:[String] = []
+    var contacts:[FirebaseNetworkManager.UserData] = []
     //let test = ["test1","test2","test3"]
 
     override func viewDidLoad() {
@@ -48,7 +48,7 @@ class UsersListViewController: UIViewController {
 
     func addContact(contactName:String){
         //Background add contact
-        DispatchQueue.global().async {
+        /*DispatchQueue.global().async {
             let data = FirebaseNetworkManager.PostContact(contactName: contactName)
             DispatchQueue.main.sync {
                 if(data != "ok"){
@@ -58,22 +58,21 @@ class UsersListViewController: UIViewController {
                     self.usersListRequest()
                 }
             }
-        }
+        }*/
     }
     
     func usersListRequest(){
         //Background get user list
         DispatchQueue.global().async {
-            let data = FirebaseNetworkManager.getContactList()
-            DispatchQueue.main.sync {
-                if(data.response != "ok"){
-                    self.okBtpopup(title: "ERROR", text: data.response)
-                }
-                else{
-                    self.contacts = data.contacts
+            FirebaseNetworkManager.getUsersList { (userData) in
+                DispatchQueue.main.async {
+                    self.contacts = userData
                     self.usersListTv.reloadData()
                     self.usersListTv.endUpdates()
-                    
+                }
+            } onError: { (err) in
+                DispatchQueue.main.async {
+                    self.okBtpopup(title: "ERROR", text: err)
                 }
             }
         }
@@ -99,7 +98,7 @@ extension UsersListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userContact", for: indexPath)
         
-        cell.textLabel?.text = contacts[indexPath.row]
+        cell.textLabel?.text = contacts[indexPath.row].name
         
         return cell
     }

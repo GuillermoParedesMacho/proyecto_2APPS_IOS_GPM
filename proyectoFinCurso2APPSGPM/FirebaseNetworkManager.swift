@@ -17,8 +17,6 @@ class FirebaseNetworkManager{
     static private let dataBase = Database.database().reference()
     static private let usersDB = dataBase.child("Users")
     
-    static private var DBcontroller = DatabaseController()
-    
     //operations
     static public func GetlogIn(email:String, password:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
         auth.signIn(withEmail: email, password: password) { (authDataResult, error) in
@@ -127,12 +125,57 @@ class FirebaseNetworkManager{
         })
     }
     
-    static public func PostContact(contactName:String) -> String{
-        return DBcontroller.addContact(token: token, name: contactName)
+    static public func PostAddContact(contactName:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        
     }
     
-    static public func getContactList() -> contactsResponse{
-        return DBcontroller.getContact(token: token)
+    static public func PostRemoveContact(contactName:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        
+    }
+    
+    static public func getContactList(onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        getContactList(filter:"") {
+            onSucseed()
+        } onError: { (err) in
+            onError(err)
+        }
+    }
+    static public func getContactList(filter:String, onSucseed: @escaping () -> Void , onError: @escaping (_ err:String) -> ()){
+        
+    }
+    
+    static public func getUsersList(onSucseed: @escaping (_ userList:Array<UserData>) -> () , onError: @escaping (_ err:String) -> ()){
+        getUsersList(filter:"") {(data) in
+            onSucseed(data)
+        } onError: { (err) in
+            onError(err)
+        }
+
+    }
+    static public func getUsersList(filter:String, onSucseed: @escaping (_ userList:Array<UserData>) -> () , onError: @escaping (_ err:String) -> ()){
+        var user:UserData? = nil
+        GetUserData { (userData) in
+            user = userData
+        
+            var response:Array<UserData> = []
+            usersDB.observeSingleEvent(of: .value) { (snapshot) in
+                if(snapshot.childrenCount > 0){
+                    for dataGroup in snapshot.children.allObjects as! [DataSnapshot]{
+                        if let data = dataGroup.value as? [String: Any]{
+                            let email = data["email"] as! String
+                            if(email != user?.email){
+                                response.append(UserData(name: data["name"] as! String, email: data["email"] as! String))
+                            }
+                        }
+                    }
+                }
+                onSucseed(response)
+            }
+        } onError: { (err) in
+            onError(err)
+            return
+        }
+        
     }
     
     //functions for operations
