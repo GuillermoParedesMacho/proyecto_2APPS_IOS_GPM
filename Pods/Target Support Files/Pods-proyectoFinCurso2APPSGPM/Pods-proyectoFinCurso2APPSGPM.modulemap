@@ -1,0 +1,6 @@
+framework module Pods_proyectoFinCurso2APPSGPM {
+  umbrella header "Pods-proyectoFinCurso2APPSGPM-umbrella.h"
+
+  export *
+  module * { export * }
+}

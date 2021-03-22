@@ -1,0 +1,6 @@
+framework module Pods_proyectoFinCurso2APPSGPMTests {
+  umbrella header "Pods-proyectoFinCurso2APPSGPMTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
